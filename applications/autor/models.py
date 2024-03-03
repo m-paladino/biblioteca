@@ -1,7 +1,7 @@
 from django.db import models
 
 # managers
-from .managers import AutorManager
+from applications.autor.managers import AutorManager
 
 class Persona(models.Model):
     nombres = models.CharField(
@@ -22,7 +22,10 @@ class Persona(models.Model):
         return str(self.id) + '-' + self.nombres + '-' + self.apellidos
 
 
-
 class Autor(Persona):
-
+    seudonimo = models.CharField(
+        'Seudonimo',
+        max_length=50,
+        blank=True
+    )
     objects = AutorManager()

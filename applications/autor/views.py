@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 # mdols local
-from .models import Autor
+from applications.autor.models import Autor
 
 
 class ListAutores(ListView):

@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.contrib.postgres.search import TrigramSimilarity
 
 
@@ -47,17 +47,30 @@ class LibroManager(models.Manager):
         return self.filter(
             categoria__id=categoria
         ).order_by('titulo')
-    
+
     def add_autor_libro(self, libro_id, autor):
         libro = self.get(id=libro_id)
         libro.autores.add(autor)
         return libro
+    
+    def count_prestamos(self):
+        return self.aggregate(
+            num_prestamos=Count('prestamos')
+        )
 
 
 class CategoriaManager(models.Manager):
-    """ managers para el modelo autor """
+    """ manager para el modelo Categoria """
 
-    def categoria_por_autor(self, autor):
+    def categoria_de_autor(self, autor_id):
+        """ Devuelve las categorias de los libros de un autor """
         return self.filter(
-            categoria_libro__autores__id=autor
+            libros__autores__id=autor_id
         ).distinct()
+
+    def listar_libros_categoria(self):
+        """Devuelve el queryset de categorias agregando el numero
+        de libros asociados a cada categoria"""
+        return self.annotate(
+            libros_count=Count('libros')
+        )

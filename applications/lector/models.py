@@ -23,7 +23,8 @@ class Prestamo(models.Model):
     )
     libro = models.ForeignKey(
         Libro, 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='prestamos'
     )
     fecha_prestamo = models.DateField()
     fecha_devolucion = models.DateField(

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class AutorConfig(AppConfig):
-    name = 'autor'
+    name = 'applications.autor'

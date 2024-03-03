@@ -10,7 +10,7 @@ from .models import Prestamo, Lector
 # forms
 from .forms import PrestamoForm, MultiplePrestamoForm
 
-class RegistrarPrestamo(FormView):
+class AddPrestamo(FormView):
     template_name = "lector/add_prestamo.html"
     form_class = PrestamoForm
     success_url = '.'
@@ -35,7 +35,7 @@ class RegistrarPrestamo(FormView):
         libro.stok = libro.stok - 1
         libro.save()
 
-        return super(RegistrarPrestamo, self).form_valid(form)
+        return super(AddPrestamo, self).form_valid(form)
 
 
 class AddPrestamo(FormView):

@@ -22,7 +22,7 @@ class Libro(models.Model):
     categoria = models.ForeignKey(
         Categoria, 
         on_delete=models.CASCADE,
-        related_name='categoria_libro'
+        related_name='libros'
     )
     autores = models.ManyToManyField(Autor)
     titulo = models.CharField(
